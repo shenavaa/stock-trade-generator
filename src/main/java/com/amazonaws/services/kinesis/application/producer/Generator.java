@@ -56,7 +56,7 @@ public class Generator {
      */
     private static final String TIMESTAMP = Long.toString(System.currentTimeMillis());
 
-    public static final String STREAM_PARAM = "stream-name";
+    public static final String STREAM_PARAM = "stream";
 
     public static final String BACKPRESSURE_SIZE = "backpressure-size";
 
@@ -128,35 +128,13 @@ public class Generator {
     public static void main(String[] args) throws Exception {
         producer = getKinesisProducer();
 
-        if (System.getProperty(STREAM_PARAM) == null) {
-            log.error("You must provide a Stream Name");
-            System.exit(1);
-        } else {
-            streamName = System.getProperty(STREAM_PARAM);
-        }
+            streamName = "stream";
 
 
-        if (System.getProperty(THROUGHPUT_SWITCH) != null ) {
-            throughputSwitch = Integer.parseInt(System.getProperty(THROUGHPUT_SWITCH));
-        }
 
-        if (System.getProperty(BACKPRESSURE_SIZE) == null) {
-            if (throughputSwitch == 0) {
-                log.error("You must provide a backpressure outstanding size");
-                System.exit(1);
-            }
-        } else {
-            backpressureSize = Integer.parseInt(System.getProperty(BACKPRESSURE_SIZE));
-        }
-
-        if (System.getProperty(BACKPRESSURE_DELAY) == null ) {
-            if (throughputSwitch == 0) {
-                log.error("You must provide a backpressure delay time (in milliseconds)");
-                System.exit(1);
-            }
-        } else {
-            backpressureDelay = Integer.parseInt(System.getProperty(BACKPRESSURE_DELAY));
-        }
+            backpressureSize = 50000;
+      
+            backpressureDelay = 500;
 
 
         
